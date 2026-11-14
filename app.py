@@ -57,4 +57,4 @@ if prompt:
                 )
 
             except Exception as e:
-                # st.error(f"Erroe:{e};
+                st.error(f"Erroe:{e}")
