@@ -13,6 +13,7 @@ st.write("Your AI-powered University Assistant")
 api_key = st.secrets["GROQ_API_KEY"]
 st.write("API key loaded:", api_key.startswith("gsk_"))
 st.write("API key length:", len(api_key))
+st.write("Secret names:", list(st.secrets.keys()))
 
 if not api_key:
     st.error("Groq API key not found. Check Codespaces Secrets.")
