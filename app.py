@@ -69,3 +69,5 @@ user_question = st.text_input("Ask your university-related question:")
 if st.button("Ask"):
     if user_question:
         st.write("Your question:", user_question)
+if user_question and st.button("Submit Question"):
+    st.info("Your question has been received!")
