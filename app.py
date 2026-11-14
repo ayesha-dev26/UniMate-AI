@@ -13,6 +13,7 @@ st.write("Your AI-powered University Assistant")
 api_key = st.secrets["GROQ_API_KEY"]
 st.write("API key loaded:", api_key.startswith("gsk_"))
 st.write("API key length:", len(api_key))
+st.write("API key preview:", api_key[:4])
 st.write("Secret names:", list(st.secrets.keys()))
 
 if not api_key:
