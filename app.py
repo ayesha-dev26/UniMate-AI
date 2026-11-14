@@ -68,9 +68,20 @@ user_question = st.text_input("Ask your university-related question:")
 
 if st.button("Ask"):
     if user_question:
-        st.write("Your question:", user_question)
-if user_question and st.button("Submit Question"):
-    st.info("Your question has been received!")
+        try:
+            response = client.chat.completions.create(
+                model="llama-3.3-70b-versatile",
+                messages=[
+                    {"role": "user", "content": user_question}
+                ]
+            )
+            st.write(response.choices[0].message.content)
+
+        except Exception as e:
+            st.error(f"Error: {e}")
+
 st.divider()
 st.subheader("About UniMate AI")
 st.write("UniMate AI helps university students with their academic questions and learning.")
+
+st.caption("© 2026 UniMate AI | Your Smart University Assistant")
