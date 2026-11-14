@@ -10,7 +10,7 @@ st.set_page_config(
 st.title("🎓 UniMate AI")
 st.write("Your AI-powered University Assistant")
 
-api_key = os.environ.get("GROQ_API_KEY")
+api_key = st.secrets["GROQ_API_KEY"]
 
 if not api_key:
     st.error("Groq API key not found. Check Codespaces Secrets.")
