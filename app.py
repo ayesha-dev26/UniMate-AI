@@ -62,3 +62,10 @@ if prompt:
 
             except Exception as e:
                 st.error(f"Erroe:{e}")
+st.subheader("Ask UniMate AI")
+
+user_question = st.text_input("Ask your university-related question:")
+
+if st.button("Ask"):
+    if user_question:
+        st.write("Your question:", user_question)
