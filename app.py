@@ -11,6 +11,7 @@ st.title("🎓 UniMate AI")
 st.write("Your AI-powered University Assistant")
 
 api_key = st.secrets["GROQ_API_KEY"]
+st.write("API key loaded:", api_key.startswith("gsk_"))
 
 if not api_key:
     st.error("Groq API key not found. Check Codespaces Secrets.")
