@@ -71,3 +71,6 @@ if st.button("Ask"):
         st.write("Your question:", user_question)
 if user_question and st.button("Submit Question"):
     st.info("Your question has been received!")
+st.divider()
+st.subheader("About UniMate AI")
+st.write("UniMate AI helps university students with their academic questions and learning.")
