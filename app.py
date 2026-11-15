@@ -10,6 +10,7 @@ st.title("🎓 UniMate AI")
 st.write("Your AI-powered University Assistant")
 
 api_key = st.secrets.get("GROQ_API_KEY", "")
+st.write("API key length:", len(api_key))
 
 if not api_key:
     st.error("Groq API key not found.")
