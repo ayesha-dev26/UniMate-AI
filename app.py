@@ -79,6 +79,8 @@ if st.button("Ask"):
 
         except Exception as e:
             st.error(f"Error: {e}")
+            else:
+        st.warning("Please enter a question first.")
 
 st.divider()
 st.subheader("About UniMate AI")
