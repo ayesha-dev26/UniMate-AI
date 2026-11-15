@@ -1,5 +1,4 @@
 import streamlit as st
-import os
 from groq import Groq
 
 st.set_page_config(
@@ -10,17 +9,15 @@ st.set_page_config(
 st.title("🎓 UniMate AI")
 st.write("Your AI-powered University Assistant")
 
-api_key = st.secrets["GROQ_API_KEY"]
-st.write("API key loaded:", api_key.startswith("gsk_"))
-st.write("API key length:", len(api_key))
-st.write("API key preview:", api_key[:4])
-st.write("Secret names:", list(st.secrets.keys()))
+api_key = st.secrets.get("GROQ_API_KEY", "")
 
 if not api_key:
-    st.error("Groq API key not found. Check Codespaces Secrets.")
+    st.error("Groq API key not found.")
     st.stop()
 
 client = Groq(api_key=api_key)
+
+st.subheader("Ask UniMate AI")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -47,13 +44,25 @@ if prompt:
                     messages=[
                         {
                             "role": "system",
-                            "content": "You are UniMate AI, a helpful university study assistant."
+                            "content": """You are UniMate AI, an expert academic assistant for university students.
+
+Answer academic questions accurately and clearly.
+Use simple English.
+Explain concepts step by step.
+Give relevant examples.
+For programming, explain code and logic.
+For mathematics, show calculations step by step.
+For computer science topics, provide correct technical explanations.
+Do not invent facts.
+If you are unsure, say so honestly.
+Stay focused on the student's question."""
                         },
                         *st.session_state.messages
                     ]
                 )
 
                 answer = response.choices[0].message.content
+
                 st.write(answer)
 
                 st.session_state.messages.append(
@@ -61,42 +70,15 @@ if prompt:
                 )
 
             except Exception as e:
-                st.error(f"Erroe:{e}")
-st.subheader("Ask UniMate AI")
-
-user_question = st.text_input("Ask your university-related question:")
-
-if st.button("Ask"):
-   if user_question:
-    try:
-        response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
-            messages=[
-                {
-                    "role": "system",
-                    "content": """You are UniMate AI, a helpful academic assistant for university students.
-                    Give accurate answers in simple English.
-                    Explain concepts step by step.
-                    Use examples when helpful.
-                    For programming, explain code clearly.
-                    For mathematics, show calculations step by step.
-                    Avoid made-up information."""
-                },
-                {
-                    "role": "user",
-                    "content": user_question
-                }
-            ]
-        )
-        st.write(response.choices[0].message.content)
-
-    except Exception as e:
-        st.error(f"Error: {e}")
-else:
-    st.warning("Please enter a question first.")
+                st.error(f"Error: {e}")
 
 st.divider()
+
 st.subheader("About UniMate AI")
-st.write("UniMate AI helps university students with their academic questions and learning.")
+
+st.write(
+    "UniMate AI helps university students with "
+    "their academic questions and learning."
+)
 
 st.caption("© 2026 UniMate AI | Your Smart University Assistant")
