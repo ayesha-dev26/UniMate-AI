@@ -70,6 +70,7 @@ if st.button("Ask"):
     if user_question:
         try:
             response = client.chat.completions.create(
+                st.write("AI response received!")
                 model="llama-3.3-70b-versatile",
                 messages=[
     {
