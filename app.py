@@ -67,36 +67,34 @@ st.subheader("Ask UniMate AI")
 user_question = st.text_input("Ask your university-related question:")
 
 if st.button("Ask"):
-    if user_question:
-        try:
-           response = client.chat.completions.create(
-    model="llama-3.3-70b-versatile",
-    messages=[
-        {
-            "role": "system",
-            "content": """You are UniMate AI, a helpful academic assistant for university students.
-            Give accurate and relevant answers in simple English.
-            Explain concepts step by step.
-            Use examples when helpful.
-            For programming, explain code clearly.
-            For mathematics, show each calculation step.
-            Avoid unrelated or made-up information.
-            If unsure, say so honestly."""
-        },
-        {
-            "role": "user",
-            "content": user_question
-        }
-    ]
-)
-]
-            )
-            st.write(response.choices[0].message.content)
+   if user_question:
+    try:
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {
+                    "role": "system",
+                    "content": """You are UniMate AI, a helpful academic assistant for university students.
+                    Give accurate answers in simple English.
+                    Explain concepts step by step.
+                    Use examples when helpful.
+                    For programming, explain code clearly.
+                    For mathematics, show calculations step by step.
+                    Avoid made-up information."""
+                },
+                {
+                    "role": "user",
+                    "content": user_question
+                }
+            ]
+        )
+        st.write(response.choices[0].message.content)
 
-        except Exception as e:
-            st.error(f"Error: {e}")
-    else:
-        st.warning("Please enter a question first.")
+    except Exception as e:
+        st.error(f"Error: {e}")
+else:
+    st.warning("Please enter a question first.")
+
 st.divider()
 st.subheader("About UniMate AI")
 st.write("UniMate AI helps university students with their academic questions and learning.")
