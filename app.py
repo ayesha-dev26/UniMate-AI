@@ -72,8 +72,22 @@ if st.button("Ask"):
             response = client.chat.completions.create(
                 model="llama-3.3-70b-versatile",
                 messages=[
-                    {"role": "user", "content": user_question}
-                ]
+    {
+        "role": "system",
+        "content": """You are UniMate AI, a helpful academic assistant for university students.
+        Give accurate and relevant answers in simple English.
+        Explain concepts step by step.
+        Use examples when helpful.
+        For programming, explain code clearly.
+        For mathematics, show each calculation step.
+        Avoid unrelated or made-up information.
+        If unsure, say so honestly."""
+    },
+    {
+        "role": "user",
+        "content": user_question
+    }
+]
             )
             st.write(response.choices[0].message.content)
 
