@@ -70,11 +70,7 @@ if st.button("Ask"):
     if user_question:
         try:
             response = client.chat.completions.create(
-                st.write("AI response received!")
-                model="llama-3.3-70b-versatile",
-                messages=[
-    {
-        "role": "system",
+                model="llama-3.3-70b-versatile",96+
         "content": """You are UniMate AI, a helpful academic assistant for university students.
         Give accurate and relevant answers in simple English.
         Explain concepts step by step.
